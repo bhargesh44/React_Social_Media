@@ -2,6 +2,7 @@ import {
   Bookmark,
   Chat,
   Event,
+  ExitToApp,
   Group,
   HelpOutline,
   PlayCircleFilledOutlined,
@@ -13,8 +14,14 @@ import React from "react";
 import "./sideBar.css";
 import { Users } from "../../dummyData";
 import CloseFriend from "../CloseFriend/CloseFriend";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
   return (
     <div className="sideBar">
       <div className="sideBarWrapper">
@@ -54,6 +61,10 @@ export default function SideBar() {
           <li className="sidebarListItem">
             <School className="sidebarIcon" />
             <span className="sidebarListItemText">Courses</span>
+          </li>
+          <li className="sidebarListItem" onClick={handleLogout}>
+            <ExitToApp className="sidebarIcon" />
+            <span className="sidebarListItemText">Logout</span>
           </li>
         </ul>
         <button className="sidebarButton">Show More</button>

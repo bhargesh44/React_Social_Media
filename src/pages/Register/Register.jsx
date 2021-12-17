@@ -8,6 +8,9 @@ export default function Register() {
   const handleLogin = () => {
     navigate("/");
   };
+  const handleSignUp = () => {
+    navigate("/social");
+  };
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -23,7 +26,9 @@ export default function Register() {
             <input placeholder="Email" className="loginInput" />
             <input placeholder="Password" className="loginInput" />
             <input placeholder="Password Again" className="loginInput" />
-            <button className="loginButton">Sign Up</button>
+            <button className="loginButton" onClick={handleSignUp}>
+              Sign Up
+            </button>
             <button className="loginRegisterButton" onClick={handleLogin}>
               Log into Account
             </button>
