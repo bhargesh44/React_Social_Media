@@ -21,6 +21,7 @@ export default function SideBar() {
 
   const handleLogout = () => {
     navigate("/");
+    //window.localStorage.clear();
   };
   return (
     <div className="sideBar">
