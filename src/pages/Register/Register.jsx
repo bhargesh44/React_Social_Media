@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import "./register.css";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
+import { IconButton, InputAdornment, OutlinedInput } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -113,16 +117,16 @@ export default function Register() {
 
           <div className="loginRight">
             <div className="loginBox">
-              <input
+              <OutlinedInput
                 type="text"
                 placeholder="Username"
                 className="loginInput"
                 value={username}
                 onChange={onChangeUsername}
-                required
+               
               />
               <span className="text-red">{error.username || ""}</span>
-              <input
+              <OutlinedInput
                 type="email"
                 placeholder="Email"
                 className="loginInput"
@@ -130,20 +134,43 @@ export default function Register() {
                 onChange={onChangeEmail}
               />
               <span className="text-red">{error.email || ""}</span>
-              <input
-                type="password"
+              <OutlinedInput
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="loginInput"
                 value={password}
                 onChange={onChangePassword}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
+
               <span className="text-red">{error.password || ""}</span>
-              <input
-                type="password"
+              <OutlinedInput
+                type={showRePassword ? "text" : "password"}
                 placeholder="Password Again"
                 className="loginInput"
                 value={rePassword}
                 onChange={onChangeRePassword}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowRePassword(!showRePassword)}
+                      edge="end"
+                    >
+                      {showRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
               <span className="text-red">{error.rePassword || ""}</span>
               <button className="loginButton" onClick={onSubmit}>

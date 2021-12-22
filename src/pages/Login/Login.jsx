@@ -4,12 +4,15 @@ import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./login.css";
+import { IconButton, InputAdornment, OutlinedInput } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function Login() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState({
     email: "",
@@ -84,7 +87,7 @@ export default function Login() {
         </div>
         <div className="loginRight">
           <div className="loginBox">
-            <input
+            <OutlinedInput
               type="email"
               placeholder="Email"
               className="loginInput"
@@ -92,12 +95,23 @@ export default function Login() {
               onChange={onChangeEmail}
             />
             <span className="text-red">{error.email || ""}</span>
-            <input
-              type="password"
+            <OutlinedInput
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="loginInput"
               value={password}
               onChange={onChangePassword}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
             <span className="text-red">{error.password || ""}</span>
             <button className="loginButton" onClick={onSubmit}>
